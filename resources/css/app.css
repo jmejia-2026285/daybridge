@@ -1,0 +1,281 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        color-scheme: dark;
+
+        /* Surface & Canvas - Token único (modo oscuro permanente) */
+        --canvas: 2 12 20;
+        --surface: 5 22 35;
+        --sunken: 2 8 15;
+        --inverse: 248 246 242;
+
+        /* Ink */
+        --ink: 255 255 255;
+        --ink-secondary: 210 220 225;
+        --ink-muted: 190 200 205;
+        --ink-disabled: 120 130 135;
+        --ink-inverse: 2 12 20;
+
+        /* Line */
+        --line: 30 40 50;
+        --line-strong: 50 60 75;
+
+        /* Brand */
+        --brand: 179 144 81;
+        --brand-soft: 20 30 45;
+        --brand-strong: 140 110 60;
+        --brand-foreground: 255 255 255;
+
+        /* Accent */
+        --accent: 218 185 129;
+        --accent-soft: 60 40 20;
+        --accent-strong: 255 214 166;
+        --accent-foreground: 5 30 57;
+
+        /* Semantic Colors */
+        --success: 76 175 80;
+        --success-soft: 20 40 30;
+        --warning: 255 214 0;
+        --warning-soft: 50 40 10;
+        --danger: 244 67 54;
+        --danger-soft: 50 20 20;
+        --info: 33 150 243;
+        --info-soft: 20 40 60;
+    }
+
+    .dark {
+        color-scheme: dark;
+
+        --canvas: 2 12 20;
+        --surface: 5 22 35;
+        --sunken: 2 8 15;
+        --inverse: 248 246 242;
+
+        --ink: 255 255 255;
+        --ink-secondary: 210 220 225;
+        --ink-muted: 190 200 205;
+        --ink-disabled: 120 130 135;
+        --ink-inverse: 2 12 20;
+
+        --line: 30 40 50;
+        --line-strong: 50 60 75;
+
+        --brand: 179 144 81;
+        --brand-soft: 20 30 45;
+        --brand-strong: 140 110 60;
+        --brand-foreground: 255 255 255;
+
+        --accent: 218 185 129;
+        --accent-soft: 60 40 20;
+        --accent-strong: 255 214 166;
+        --accent-foreground: 5 30 57;
+
+        --success: 76 175 80;
+        --success-soft: 20 40 30;
+        --warning: 255 214 0;
+        --warning-soft: 50 40 10;
+        --danger: 244 67 54;
+        --danger-soft: 50 20 20;
+        --info: 33 150 243;
+        --info-soft: 20 40 60;
+    }
+
+    * {
+        border-color: rgb(var(--line));
+    }
+
+    html {
+        -webkit-tap-highlight-color: transparent;
+        background-color: rgb(var(--canvas));
+    }
+
+    body {
+        @apply overflow-x-clip bg-canvas font-sans text-ink antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    ::selection {
+        @apply bg-accent text-accent-foreground;
+    }
+
+    :focus-visible {
+        @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-canvas;
+    }
+
+    [x-cloak] {
+        display: none !important;
+    }
+}
+
+@layer utilities {
+    .pt-safe {
+        padding-top: env(safe-area-inset-top);
+    }
+
+    .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .min-touch {
+        min-height: 2.75rem;
+        min-width: 2.75rem;
+    }
+
+    .tap {
+        touch-action: manipulation;
+    }
+
+    .font-expanded {
+        font-stretch: 112.5%;
+    }
+
+    .font-condensed {
+        font-stretch: 87.5%;
+    }
+}
+
+@layer components {
+    .area-bar,
+    .area-dot {
+        background-color: color-mix(in srgb, var(--area-color) 55%, white);
+    }
+
+    .avatar-initials {
+        border-color: color-mix(in srgb, var(--area-color) 40%, transparent);
+        background-color: color-mix(in srgb, var(--area-color) 30%, rgb(var(--surface)));
+        color: color-mix(in srgb, var(--area-color) 32%, rgb(var(--ink)));
+    }
+
+    /* Apple Liquid Glass Spec - Single dark token (light theme removed) */
+    .apple-liquid-glass-light {
+        background-color: rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(12px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow:
+            inset 0 1px 1px rgba(255, 255, 255, 0.1),
+            0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .apple-liquid-glass-dense {
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(32px) saturate(200%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        box-shadow:
+            inset 0 1px 2px rgba(255, 255, 255, 0.1),
+            0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Barras fijas (cabecera y navegación móvil): el contenido pasa por debajo
+       al hacer scroll, así que necesitan más opacidad que el vidrio ligero
+       para que textos e iconos no se mezclen con lo que hay detrás. */
+    .glass-nav {
+        background-color: rgb(var(--canvas) / 0.75);
+        backdrop-filter: blur(24px) saturate(180%);
+        border-color: rgb(255 255 255 / 0.08);
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.06);
+    }
+
+    /* Velo sobre la foto de fondo. La franja superior se oscurece para que el
+       texto secundario de las cabeceras mantenga contraste sobre el cielo claro. */
+    .glass-overlay {
+        background:
+            linear-gradient(to bottom, rgb(var(--canvas) / 0.6) 0%, rgb(var(--canvas) / 0.25) 35%, transparent 60%),
+            radial-gradient(ellipse at 30% 20%, rgb(0 0 0 / 0.75), transparent 55%),
+            radial-gradient(ellipse at 70% 80%, rgb(0 0 0 / 0.45), transparent 55%),
+            radial-gradient(circle at center, rgb(0 0 0 / 0.5) 0%, rgb(var(--canvas)) 100%);
+    }
+
+    /* Accessibility Fallback: Reduce Transparency */
+    @media (prefers-reduced-transparency: reduce) {
+        .glass-nav {
+            background-color: rgb(var(--canvas)) !important;
+            backdrop-filter: none !important;
+        }
+
+        .apple-liquid-glass-light, .apple-liquid-glass-dense {
+            background-color: rgb(var(--surface)) !important;
+            backdrop-filter: none !important;
+        }
+    }
+
+    /* Custom Scrollbar for Glass Panels */
+    .glass-scrollbar::-webkit-scrollbar {
+        width: 6px;
+    }
+    .glass-scrollbar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    .glass-scrollbar::-webkit-scrollbar-thumb {
+        background: rgba(var(--ink), 0.2);
+        border-radius: 10px;
+    }
+    .glass-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: rgba(var(--ink), 0.4);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Bubble / pill glass for selection and cards */
+.bubble-glass {
+    border-radius: 24px;
+    background-color: rgba(0,0,0,0.45);
+    backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.14);
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* Global Liquid Glass override for legacy bg-surface cards */
+.border.border-line.bg-surface {
+    background-color: rgba(0,0,0,0.4) !important;
+    backdrop-filter: blur(32px) saturate(200%) !important;
+    border-color: rgba(255,255,255,0.1) !important;
+    border-radius: 20px !important;
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 12px 40px rgba(0,0,0,0.4);
+}
+
+/* Mejora de legibilidad tipográfica sobre vidrio */
+.apple-liquid-glass-light, .apple-liquid-glass-dense, .border.border-line.bg-surface {
+    color: rgb(var(--ink));
+}
+.apple-liquid-glass-light *:not(a):not(button), .apple-liquid-glass-dense *:not(a):not(button) {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.35);
+}
+
+/* Forzar vidrio en cualquier .bg-surface */
+.bg-surface {
+    background-color: rgba(0,0,0,0.4) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    border-radius: 20px !important;
+}
+
+/* Redondeo general de tarjetas y dashboards */
+.border.border-line,
+.border.border-line.apple-liquid-glass-light,
+.border.border-line.apple-liquid-glass-dense,
+.border.border-line.bg-surface {
+    border-radius: 20px !important;
+}

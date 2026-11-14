@@ -1,0 +1,89 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Enums\ItDeskRole;
+use App\Enums\UserRole;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
+/**
+ * @extends Factory<User>
+ */
+class UserFactory extends Factory
+{
+    /**
+     * The current password being used by the factory.
+     */
+    protected static ?string $password;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => static::$password ??= Hash::make('password'),
+            'remember_token' => Str::random(10),
+            'role' => UserRole::User,
+            'it_desk_role' => null,
+            'is_active' => true,
+            'area_id' => null,
+            'job_title' => null,
+            'birth_date' => null,
+            'joined_at' => null,
+        ];
+    }
+
+    /**
+     * Indicate that the model's email address should be unverified.
+     */
+    public function unverified(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'email_verified_at' => null,
+        ]);
+    }
+
+    public function admin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => UserRole::Admin,
+        ]);
+    }
+
+    public function editor(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => UserRole::Editor,
+        ]);
+    }
+
+    public function inactive(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_active' => false,
+        ]);
+    }
+
+    public function itDeskAdmin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'it_desk_role' => ItDeskRole::Admin,
+        ]);
+    }
+
+    public function technician(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'it_desk_role' => ItDeskRole::Tecnico,
+        ]);
+    }
+}

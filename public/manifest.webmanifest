@@ -1,0 +1,50 @@
+{
+    "name": "Daybridge — Comunicación interna",
+    "short_name": "Daybridge",
+    "description": "El puente diario entre las personas y la información de tu empresa.",
+    "id": "/",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "display_override": ["window-controls-overlay", "standalone"],
+    "orientation": "any",
+    "background_color": "#020C14",
+    "theme_color": "#0B1416",
+    "lang": "es",
+    "dir": "ltr",
+    "categories": ["business", "productivity", "social"],
+    "icons": [
+        {
+            "src": "/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/icons/icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Inicio",
+            "short_name": "Inicio",
+            "url": "/",
+            "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Cumpleaños",
+            "short_name": "Cumpleaños",
+            "url": "/cumpleanos",
+            "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+        }
+    ]
+}
