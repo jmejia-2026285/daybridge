@@ -44,4 +44,9 @@ return [
         ],
     ],
 
+    'backup' => [
+        'repo' => env('BACKUP_REPO', 'jmejia-2026285/daybridge-respaldo'),
+        'retention_days' => (int) env('BACKUP_RETENTION_DAYS', 60),
+    ],
+
 ];
