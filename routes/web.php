@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackgroundController;
 use App\Http\Controllers\DocumentDownloadController;
+use App\Http\Controllers\InventoryExportController;
 use App\Http\Controllers\MoodleSsoController;
 use App\Http\Controllers\ProfileAvatarController;
 use App\Models\Conversation;
@@ -47,6 +48,9 @@ Route::middleware(['auth', 'verified', 'active'])->group(function () {
     Volt::route('it-desk/equipos/{equipment}/imprimir/{ticket?}', 'pages.it-desk.equipment.print')->name('it-desk.equipment.print');
     Volt::route('it-desk/equipos/{equipment}', 'pages.it-desk.equipment.show')->name('it-desk.equipment.show');
     Volt::route('it-desk/equipos/{equipment}/editar', 'pages.it-desk.equipment.edit')->name('it-desk.equipment.edit');
+    Volt::route('it-desk/inventario', 'pages.it-desk.inventory.index')->name('it-desk.inventory.index');
+    Route::get('it-desk/inventario/informe.pdf', [InventoryExportController::class, 'pdf'])->name('it-desk.inventory.export.pdf');
+    Route::get('it-desk/inventario/informe.word', [InventoryExportController::class, 'word'])->name('it-desk.inventory.export.word');
 
     Route::get('mensajes', function () {
         return view('chat.index', ['title' => 'Mensajes · Daybridge']);

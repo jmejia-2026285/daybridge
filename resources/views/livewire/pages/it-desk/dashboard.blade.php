@@ -115,6 +115,15 @@ new #[Layout('layouts.app')] #[Title('IT Desk · Daybridge')] class extends Comp
             </a>
 
             <a
+                href="{{ route('it-desk.inventory.index') }}"
+                wire:navigate
+                class="inline-flex min-h-10 items-center gap-2 rounded-md border border-line px-3.5 text-sm font-medium text-ink transition duration-fast ease-signal hover:bg-sunken"
+            >
+                <x-icon name="clipboard" class="h-4 w-4" />
+                Inventario
+            </a>
+
+            <a
                 href="{{ route('it-desk.equipment.create') }}"
                 wire:navigate
                 class="inline-flex min-h-10 items-center gap-2 rounded-md bg-brand px-4 text-sm font-semibold text-brand-foreground transition duration-fast ease-signal hover:bg-brand-strong"
